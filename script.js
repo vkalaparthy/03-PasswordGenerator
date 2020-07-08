@@ -27,7 +27,7 @@ function generatePassword() {
   var pwdLength = prompt("What is the lenght of the password you want to generate?");
   var resPwd = "";
   var criteria = 0;
-  console.log("Length choosen: "+pwdLength);
+  console.log("Length choosen: " + pwdLength);
   if ( (pwdLength >= 8) && (pwdLength <= 128)) {
     var lowChoice = confirm("Click OK to include lowercase characters in password");
     if (lowChoice) {
@@ -50,8 +50,7 @@ function generatePassword() {
     if (criteria >= 1) {
 
       // Randomly choose the array to add a character to password
-
-      while (resPwd.length < (pwdLength-criteria)) {
+      while (resPwd.length < (pwdLength - criteria)) {
         //randomly choose which array to access for your next character
         var whichArray = Math.floor(Math.random() * 4) + 1;
         //console.log("choose array " + whichArray)
@@ -73,7 +72,8 @@ function generatePassword() {
         }
       }
       
-      // Added the below code to make sure each criteria is selected atleast once.
+      // Added the below code to make sure each criteria is selected atleast 
+      //once -- This is the reason why while loop with condition (pwdLength - criteria)
       if (special) {
         resPwd = resPwd + specialArray[Math.floor(Math.random() * 32)];
         console.log (resPwd);
@@ -106,12 +106,13 @@ function generatePassword() {
   return resPwd;
 }
 
-// This function shuffles the content of res
+// This function shuffles the content of res - purposely made this
+// shuffle first 1/2 of string to other 1/2 -- as it is already random!
 function shuffle (res) {
-  console.log ("password before shuffle: " + res);
+  console.log ("password before shuffle: " + res + " length = "+res.length);
   var n = res.length;
   var m = Math.floor(n/2);
-  console.log ("m = "+m);
+  //console.log ("m = " + m);
   var tmpPsw = res.split('');
 
   for (var i = m; i < res.length; i++) {
@@ -123,7 +124,7 @@ function shuffle (res) {
     tmpPsw[j] = tmp;
   }
   res = tmpPsw.join('');
-  console.log ("password after shuffle: " + res);
+  console.log ("password after shuffle: " + res + " length = "+res.length);
   return res;
 }
 
