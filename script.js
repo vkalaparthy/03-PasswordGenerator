@@ -12,6 +12,9 @@ function writePassword() {
 
 }
 
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+
 function generatePassword() {
 
   // This can be achieved by just defining a whole string
@@ -24,6 +27,7 @@ function generatePassword() {
   var pwdLength = prompt("What is the lenght of the password you want to generate?");
   var resPwd = "";
   var criteria = 0;
+  console.log("Length choosen: "+pwdLength);
   if ( (pwdLength >= 8) && (pwdLength <= 128)) {
     var lowChoice = confirm("Click OK to include lowercase characters in password");
     if (lowChoice) {
@@ -41,17 +45,16 @@ function generatePassword() {
     if (numChoice) {
       criteria++;
     }
-    console.log ("lowercase " + lowChoice +" Upper case " + upChoice + " special char " + special + " Numbers " + numChoice);
+    console.log ("lowercase - " + lowChoice +" * Upper case - " + upChoice + " * special char - " + special + " * Numbers - " + numChoice);
     // If user selects atleast one, then continue
     if (criteria >= 1) {
 
-      // Introducing the below code, so password generated will
-      // not always be having a sequence!
+      // Randomly choose the array to add a character to password
 
       while (resPwd.length < (pwdLength-criteria)) {
         //randomly choose which array to access for your next character
         var whichArray = Math.floor(Math.random() * 4) + 1;
-        console.log("choose array " + whichArray)
+        //console.log("choose array " + whichArray)
         if ((whichArray === 1) && lowChoice) {
           resPwd = resPwd + lowerChars[Math.floor(Math.random() * 26)];
           console.log (resPwd);
@@ -61,7 +64,7 @@ function generatePassword() {
           console.log (resPwd);
         }
         else if ((whichArray === 3) && special) {
-          resPwd = resPwd + specialArray[Math.floor(Math.random() * 33)];
+          resPwd = resPwd + specialArray[Math.floor(Math.random() * 32)];
           console.log (resPwd);
         }
         else if ((whichArray === 4) && numChoice) {
@@ -72,7 +75,7 @@ function generatePassword() {
       
       // Added the below code to make sure each criteria is selected atleast once.
       if (special) {
-        resPwd = resPwd + specialArray[Math.floor(Math.random() * 33)];
+        resPwd = resPwd + specialArray[Math.floor(Math.random() * 32)];
         console.log (resPwd);
       }
       if (lowChoice) {
@@ -87,11 +90,15 @@ function generatePassword() {
         resPwd = resPwd + upChars[Math.floor(Math.random() * 26)];
         console.log (resPwd);
       }
+      // shuffle this further 
+      resPwd = shuffle(resPwd);
 
     } else {
       alert ("Try again, You need to choose atleast one criteria!")
     }
     
+  } else if (!pwdLength) {
+    alert ("Bye Bye!");
   } else {
     alert ("Try again, password could be 8 to 128 characters long!");
   }
@@ -99,5 +106,24 @@ function generatePassword() {
   return resPwd;
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+// This function shuffles the content of res
+function shuffle (res) {
+  console.log ("password before shuffle: " + res);
+  var n = res.length;
+  var m = Math.floor(n/2);
+  console.log ("m = "+m);
+  var tmpPsw = res.split('');
+
+  for (var i = m; i < res.length; i++) {
+    //var tmp = resPwd[i];
+    var j = Math.floor(Math.random() * m);
+    var tmp = tmpPsw[i];
+    //console.log ("i = "+i+" j = "+j +" & tmp "+ tmp);
+    tmpPsw[i] = tmpPsw[j];
+    tmpPsw[j] = tmp;
+  }
+  res = tmpPsw.join('');
+  console.log ("password after shuffle: " + res);
+  return res;
+}
+
