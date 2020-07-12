@@ -49,8 +49,25 @@ function generatePassword() {
     // If user selects atleast one, then continue
     if (criteria >= 1) {
 
-      // Randomly choose the array to add a character to password
-      while (resPwd.length < (pwdLength - criteria)) {
+      // First make sure each criteria is selected atleast once 
+      if (special) {
+        resPwd = resPwd + specialArray[Math.floor(Math.random() * 32)];
+        console.log (resPwd);
+      }
+      if (lowChoice) {
+        resPwd = resPwd + lowerChars[Math.floor(Math.random() * 26)];
+        console.log (resPwd);
+      }
+      if (numChoice) {
+        resPwd = resPwd + numArray[Math.floor(Math.random() * 10)];
+        console.log (resPwd);
+      }
+      if (upChoice) {
+        resPwd = resPwd + upChars[Math.floor(Math.random() * 26)];
+        console.log (resPwd);
+      }
+      // Next - Randomly choose the array to add a character to password
+      while (resPwd.length < pwdLength) {
         //randomly choose which array to access for your next character
         var whichArray = Math.floor(Math.random() * 4) + 1;
         //console.log("choose array " + whichArray)
@@ -72,24 +89,6 @@ function generatePassword() {
         }
       }
       
-      // Added the below code to make sure each criteria is selected atleast 
-      //once -- This is the reason why while loop with condition (pwdLength - criteria)
-      if (special) {
-        resPwd = resPwd + specialArray[Math.floor(Math.random() * 32)];
-        console.log (resPwd);
-      }
-      if (lowChoice) {
-        resPwd = resPwd + lowerChars[Math.floor(Math.random() * 26)];
-        console.log (resPwd);
-      }
-      if (numChoice) {
-        resPwd = resPwd + numArray[Math.floor(Math.random() * 10)];
-        console.log (resPwd);
-      }
-      if (upChoice) {
-        resPwd = resPwd + upChars[Math.floor(Math.random() * 26)];
-        console.log (resPwd);
-      }
       // shuffle this further 
       resPwd = shuffle(resPwd);
 
@@ -100,7 +99,7 @@ function generatePassword() {
   } else if (!pwdLength) {
     alert ("Bye Bye!");
   } else {
-    alert ("Try again, password could be 8 to 128 characters long!");
+    alert ("Try again, password should be 8 to 128 characters long!");
   }
 
   return resPwd;
