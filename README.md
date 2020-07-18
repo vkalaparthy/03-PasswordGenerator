@@ -7,6 +7,7 @@ User should first click on "Generate Password" button to
 start the process.
 
 When user is asked "What is the lenght of the password you want to generate?" 
+
     - If user chooses anything less than 8 or more than 128, and clicks "OK" user gets an alert message.
     - If user chooses "Cancel", then user gets "Bye Bye!" alert.
     - If user chooses the number between 8 and 128, a series of questions are asked to find the user criteria.
