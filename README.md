@@ -1,4 +1,4 @@
-# 03homework
+# 03-PasswordGenerator
 Password Generator
 
 This code generates random passowrd based on user's choice.
